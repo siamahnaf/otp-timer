@@ -1,0 +1,50 @@
+{
+  "name": "@siamf/otp-timer",
+  "version": "4.0.0",
+  "description": "A simple react otp timer component with resend functionality🤷",
+  "homepage": "https://github.com/siamahnaf/otp-timer",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rimraf dist && npm run build:esm && npm run build:cjs",
+    "build:esm": "tsc",
+    "build:cjs": "tsc --module CommonJS --outDir dist/cjs"
+  },
+  "author": {
+    "name": "Siam Ahnaf",
+    "email": "mail@siamahnaf.com",
+    "url": "https://www.siamahnaf.com"
+  },
+  "license": "MIT",
+  "keywords": [
+    "react",
+    "nextjs",
+    "one-time-password",
+    "otp-timer",
+    "otptimer",
+    "otp",
+    "otp-timer",
+    "timer",
+    "reactotptimer"
+  ],
+  "repository": {
+    "type": "git",
+    "directory": "https://github.com/siamahnaf/otp-timer",
+    "url": "https://github.com/siamahnaf/otp-timer"
+  },
+  "devDependencies": {
+    "@types/node": "^22.12.0",
+    "@types/react": "^19.0.8",
+    "@types/react-dom": "^19.0.3",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "typescript": "^5.7.3"
+  },
+  "peerDependencies": {
+    "react": "^18 || ^19",
+    "react-dom": "^18 || ^19"
+  }
+}
