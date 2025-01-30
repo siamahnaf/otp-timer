@@ -1,10 +1,17 @@
-# otp-timer-ts
+<br/>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://res.cloudinary.com/dub0dpenl/image/upload/v1731780157/Personal%20Logo/logo-white_e6fujz.png">
+  <source media="(prefers-color-scheme: light)" srcset="https://res.cloudinary.com/dub0dpenl/image/upload/v1731780152/Personal%20Logo/logo-dark_qqwrqu.png">
+  <img alt="Siam Ahnaf" src="https://res.cloudinary.com/dub0dpenl/image/upload/v1731780152/Personal%20Logo/logo-dark_qqwrqu.png" height="auto" width="240">
+</picture> 
+<br/> <br/>
+
+
+# @siamf/otp-timer
 
 A simple and customizable react otp timer component with typescript support. very simple and more customizable design and smallest bundle size about 13kb. You can use this component into any react and nextjs projects.
 
-[![npm downloads](https://cdn.jsdelivr.net/gh/siamahnaf198/react-simple-phone-input@main/assets/downloads.svg)](https://www.npmjs.com/package/otp-timer-ts)
-[![PRs Welcome](https://cdn.jsdelivr.net/gh/siamahnaf198/react-simple-phone-input@main/assets/prs-welcome.svg)](https://github.com/siamahnaf198/otp-timer-ts)
-[![MIT licensed](https://cdn.jsdelivr.net/gh/siamahnaf198/react-simple-phone-input@main/assets/license.svg)](https://github.com/siamahnaf198/otp-timer-ts/blob/main/LICENSE)
+<a href="https://www.buymeacoffee.com/siamahnaf" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
 
 - SSR Friendly
 - Customizable
@@ -15,7 +22,7 @@ A simple and customizable react otp timer component with typescript support. ver
 ## Installation
 
 ```shell-script
-$ npm i otp-timer-ts --save
+$ npm i @siamf/otp-timer
 ```
 
 ## Demo
@@ -24,13 +31,15 @@ $ npm i otp-timer-ts --save
 
 ## Usage?
 
-```
-import { Otptimer } from "otp-timer-ts";
+```javascript
+import { Otptimer } from "@siamf/otp-timer";
 
-const Home = () => {
+const MyComponent = () => {
+
   const handleResend = () => {
     //desired function to be performed on clicking resend button
   }
+
   return (
     <div>
       <Otptimer minutes={0} seconds={5} onResend={handleResend} />
@@ -38,9 +47,7 @@ const Home = () => {
   );
 };
 
-export default Home;
-
-
+export default MyComponent;
 ```
 
 ## Options
@@ -125,8 +132,4 @@ You are welcome to create an issue.
 
 - Author - [Siam Ahnaf](https://www.siamahnaf.com/)
 - Website - [https://www.siamahnaf.com/](https://www.siamahnaf.com/)
-- Twitter - [https://twitter.com/siamahnaf198](https://twitter.com/siamahnaf198)
 - Github - [https://github.com/siamahnaf](https://github.com/siamahnaf)
-
-## License
-otp-timer-ts is [MIT licensed](https://github.com/siamahnaf198/otp-timer-ts/blob/main/LICENSE).
