@@ -74,7 +74,7 @@ export default function App() {
 }
 ```
 
-### Customization
+# Customization
 
 ## `OtpTimer` component
 
