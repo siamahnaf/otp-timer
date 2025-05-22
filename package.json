@@ -1,6 +1,6 @@
 {
   "name": "@siamf/otp-timer",
-  "version": "5.0.1",
+  "version": "5.0.2",
   "description": "A simple react otp timer component with resend functionality🤷",
   "homepage": "https://github.com/siamahnaf/otp-timer",
   "main": "dist/cjs/index.js",
