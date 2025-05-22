@@ -45,7 +45,15 @@ const MyComponent = () => {
 
   return (
     <div>
-      <Otptimer minutes={0} seconds={5} onResend={handleResend} />
+      <Otptimer
+          minutes={0}
+          seconds={30}
+          onResend={handleResend}
+          renderText={(props) => <p>You can resend code in {props.minutes} minutes and {props.seconds} seconds</p>}
+          renderButton={(props) => <button {...props}>
+              Send Code Again
+          </button>}
+      />
     </div>
   );
 };
@@ -85,72 +93,8 @@ export default function App() {
 |seconds|number of seconds for which timer must be set|30|
 |minutes|number of minutes for which the timer must be set|0|
 |onResend|function that would get triggered on clicking the resend button|n/a|
-|text|content that you want to put down|Resend otp in|
-|ButtonText|button text|Resend|
-|showSpinner|If you want to show any button loading|false|
-|fetching|If you want to show any button loading icon with fetching state|false|
-|spinnerComponent|Your custom spinner component for render|null|
-
-
-### Styling
-
-<table>
-  <tr>
-    <th> Name </th>
-    <th> Type </th>
-    <th> Description </th>
-  </tr>
-  <tr>
-    <td> containerClass </td>
-    <td> string </td>
-    <td> timer Container class name </td>
-  </tr>
-  <tr>
-    <td> textClass </td>
-    <td> string </td>
-    <td> text class name </td>
-  </tr>
-  <tr>
-    <td> timerClass </td>
-    <td> string </td>
-    <td> timer class name </td>
-  </tr>
-  <tr>
-    <td> buttonContainerClass </td>
-    <td> string </td>
-    <td> button container class </td>
-  </tr>
-  <tr>
-    <td> buttonClass </td>
-    <td> string </td>
-    <td> button class </td>
-  </tr>
-  <tr>
-    <td> buttonStyle </td>
-    <td> CSSProperties </td>
-    <td> styles for resend button </td>
-  </tr>
-  <tr>
-    <td> buttonContainerStyle </td>
-    <td> CSSProperties </td>
-    <td> styles for resend button container </td>
-  </tr>
-  <tr>
-    <td> textStyle </td>
-    <td> CSSProperties </td>
-    <td> styles for text </td>
-  </tr>
-  <tr>
-    <td> timerStyle </td>
-    <td> CSSProperties </td>
-    <td> styles for timer </td>
-  </tr>
-  <tr>
-    <td> textContainerStyle </td>
-    <td> CSSProperties </td>
-    <td> styles for timer text container </td>
-  </tr>
-</table>
+|renderText|Customizable text content(See Example Code)|Required|
+|renderButton|Customizable button content(See Example Code)|Required|
 
 ## `OtpInput` component
 
