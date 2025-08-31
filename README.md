@@ -35,7 +35,7 @@ $ npm i @siamf/otp-timer
 ### `OtpTimer` Component
 
 ```javascript
-import { Otptimer } from "@siamf/otp-timer";
+import { OtpTimer } from "@siamf/otp-timer";
 
 const MyComponent = () => {
 
@@ -45,7 +45,7 @@ const MyComponent = () => {
 
   return (
     <div>
-      <Otptimer
+      <OtpTimer
           minutes={0}
           seconds={30}
           onResend={handleResend}
