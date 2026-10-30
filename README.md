@@ -184,7 +184,7 @@ const handlePaste: React.ClipboardEventHandler<HTMLDivElement> = (event) => {
     <td>inputType</td>
     <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Input#input_types">&lt;input&gt; type<a></td>
     <td>false</td>
-    <td>text</td>
+    <td>tel</td>
     <td>The type of the input that will be passed to the input element being rendered. In v2 <code>isInputNum</code> used to set the input type as <code>tel</code> and prevented non numerical entries, so as to avoid the spin buttons added to the inputs with input type <code>number</code>. That behaviour is still supported if you pass <code>tel</code> to the inputType prop.</td>
   </tr>
   <tr>

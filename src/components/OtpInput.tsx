@@ -48,7 +48,7 @@ const OtpInput = ({
     onPaste,
     renderInput,
     shouldAutoFocus = false,
-    inputType = "text",
+    inputType = "tel",
     renderSeparator,
     placeholder,
     containerStyle,
@@ -90,8 +90,22 @@ const OtpInput = ({
         return isTypeValid && value.trim().length === 1;
     };
 
+    const getTypedValue = (value: string) => {
+        const current = getOTPValue()[activeInput];
+        return current && value.length > 1 ? value.replace(current, "") : value;
+    };
+
+    const moveCaretToEnd = (input: HTMLInputElement) => {
+        const length = input.value.length;
+        try {
+            input.setSelectionRange(length, length);
+        } catch {
+            //Unsupported Type
+        }
+    };
+
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const { value } = event.target;
+        const value = getTypedValue(event.target.value);
 
         if (isInputValueValid(value)) {
             changeCodeAtFocus(value);
@@ -103,7 +117,7 @@ const OtpInput = ({
         const { nativeEvent } = event;
         const value = event.target.value;
 
-        if (!isInputValueValid(value)) {
+        if (!isInputValueValid(getTypedValue(value))) {
             if (value.length === numInputs) {
                 const hasInvalidInput = value.split("").some((cellInput) => !isInputValueValid(cellInput));
                 if (!hasInvalidInput) {
@@ -125,8 +139,10 @@ const OtpInput = ({
     };
 
     const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => (index: number) => {
+        const input = event.target;
         setActiveInput(index);
-        event.target.select();
+        moveCaretToEnd(input);
+        requestAnimationFrame(() => moveCaretToEnd(input));
     };
 
     const handleBlur = () => {
@@ -165,9 +181,10 @@ const OtpInput = ({
     const focusInput = (index: number) => {
         const activeInput = Math.max(Math.min(numInputs - 1, index), 0);
 
-        if (inputRefs.current[activeInput]) {
-            inputRefs.current[activeInput]?.focus();
-            inputRefs.current[activeInput]?.select();
+        const input = inputRefs.current[activeInput];
+        if (input) {
+            input.focus({ preventScroll: true });
+            moveCaretToEnd(input);
             setActiveInput(activeInput);
         }
     };
@@ -229,7 +246,7 @@ const OtpInput = ({
                             onBlur: handleBlur,
                             onKeyDown: handleKeyDown,
                             onPaste: handlePaste,
-                            autoComplete: "off",
+                            autoComplete: "one-time-code",
                             "aria-label": `Please enter OTP character ${index + 1}`,
                             style: Object.assign(
                                 !skipDefaultStyles ? ({ width: "1em", textAlign: "center" } as const) : {},

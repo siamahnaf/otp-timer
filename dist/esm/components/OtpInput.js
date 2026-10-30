@@ -1,7 +1,7 @@
 import { jsxs as _jsxs, jsx as _jsx } from "react/jsx-runtime";
 import React from "react";
 const isStyleObject = (obj) => typeof obj === "object" && obj !== null;
-const OtpInput = ({ value = "", numInputs = 4, onChange, onPaste, renderInput, shouldAutoFocus = false, inputType = "text", renderSeparator, placeholder, containerStyle, inputStyle, skipDefaultStyles = false, }) => {
+const OtpInput = ({ value = "", numInputs = 4, onChange, onPaste, renderInput, shouldAutoFocus = false, inputType = "tel", renderSeparator, placeholder, containerStyle, inputStyle, skipDefaultStyles = false, }) => {
     const [activeInput, setActiveInput] = React.useState(0);
     const inputRefs = React.useRef([]);
     const getOTPValue = () => (value ? value.toString().split("") : []);
@@ -30,8 +30,21 @@ const OtpInput = ({ value = "", numInputs = 4, onChange, onPaste, renderInput, s
         const isTypeValid = isInputNum ? !isNaN(Number(value)) : typeof value === "string";
         return isTypeValid && value.trim().length === 1;
     };
+    const getTypedValue = (value) => {
+        const current = getOTPValue()[activeInput];
+        return current && value.length > 1 ? value.replace(current, "") : value;
+    };
+    const moveCaretToEnd = (input) => {
+        const length = input.value.length;
+        try {
+            input.setSelectionRange(length, length);
+        }
+        catch (_a) {
+            //Unsupported Type
+        }
+    };
     const handleChange = (event) => {
-        const { value } = event.target;
+        const value = getTypedValue(event.target.value);
         if (isInputValueValid(value)) {
             changeCodeAtFocus(value);
             focusInput(activeInput + 1);
@@ -40,7 +53,7 @@ const OtpInput = ({ value = "", numInputs = 4, onChange, onPaste, renderInput, s
     const handleInputChange = (event) => {
         const { nativeEvent } = event;
         const value = event.target.value;
-        if (!isInputValueValid(value)) {
+        if (!isInputValueValid(getTypedValue(value))) {
             if (value.length === numInputs) {
                 const hasInvalidInput = value.split("").some((cellInput) => !isInputValueValid(cellInput));
                 if (!hasInvalidInput) {
@@ -60,8 +73,10 @@ const OtpInput = ({ value = "", numInputs = 4, onChange, onPaste, renderInput, s
         }
     };
     const handleFocus = (event) => (index) => {
+        const input = event.target;
         setActiveInput(index);
-        event.target.select();
+        moveCaretToEnd(input);
+        requestAnimationFrame(() => moveCaretToEnd(input));
     };
     const handleBlur = () => {
         setActiveInput(activeInput - 1);
@@ -97,11 +112,11 @@ const OtpInput = ({ value = "", numInputs = 4, onChange, onPaste, renderInput, s
         }
     };
     const focusInput = (index) => {
-        var _a, _b;
         const activeInput = Math.max(Math.min(numInputs - 1, index), 0);
-        if (inputRefs.current[activeInput]) {
-            (_a = inputRefs.current[activeInput]) === null || _a === void 0 ? void 0 : _a.focus();
-            (_b = inputRefs.current[activeInput]) === null || _b === void 0 ? void 0 : _b.select();
+        const input = inputRefs.current[activeInput];
+        if (input) {
+            input.focus({ preventScroll: true });
+            moveCaretToEnd(input);
             setActiveInput(activeInput);
         }
     };
@@ -148,7 +163,7 @@ const OtpInput = ({ value = "", numInputs = 4, onChange, onPaste, renderInput, s
                         onBlur: handleBlur,
                         onKeyDown: handleKeyDown,
                         onPaste: handlePaste,
-                        autoComplete: "off",
+                        autoComplete: "one-time-code",
                         "aria-label": `Please enter OTP character ${index + 1}`,
                         style: Object.assign(!skipDefaultStyles ? { width: "1em", textAlign: "center" } : {}, isStyleObject(inputStyle) ? inputStyle : {}),
                         className: typeof inputStyle === "string" ? inputStyle : undefined,
